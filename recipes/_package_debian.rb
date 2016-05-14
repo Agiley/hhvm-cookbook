@@ -13,6 +13,21 @@ when 13.1
 when 14.04
     'trusty'
 
+when 14.10
+    'utopic'
+
+when 15.04
+    'vivid'
+
+when 15.10
+    'wily'
+
+when 16.04
+    'xenial'
+
+when 16.10
+    'yakkety'
+
 else
     raise %W(Platform not supported: #{node['platform_family']} (#{node[:platform]}) #{node['platform_version']}).join(' ')
 end
@@ -32,6 +47,7 @@ apt_repository 'hhvm' do
   distribution release
   components   ['main']
   key          'http://dl.hhvm.com/conf/hhvm.gpg.key'
+  only_if { node['platform_version'].to_f < 16.04 } # Xenial and above comes with packages for hhvm
 end
 
 if node['hhvm']['package']['type'] == :default || node['hhvm']['package']['type'] == 'default'
