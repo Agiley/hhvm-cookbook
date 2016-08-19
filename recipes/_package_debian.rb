@@ -47,7 +47,6 @@ apt_repository 'hhvm' do
   distribution release
   components   ['main']
   key          'http://dl.hhvm.com/conf/hhvm.gpg.key'
-  only_if { node['platform_version'].to_f < 16.04 } # Xenial and above comes with packages for hhvm
 end
 
 if node['hhvm']['package']['type'] == :default || node['hhvm']['package']['type'] == 'default'
